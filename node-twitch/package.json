@@ -1,0 +1,23 @@
+{
+  "name": "node-twitch",
+  "version": "1.0.0",
+  "description": "A Node.js twitch api",
+  "main": "twitch.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/quackware/node-twitch"
+  },
+  "keywords": [
+    "twitch",
+    "api"
+  ],
+  "author": "Curtis Larson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/quackware/node-twitch/issues"
+  },
+  "homepage": "https://github.com/quackware/node-twitch"
+}
