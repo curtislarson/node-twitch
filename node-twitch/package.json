@@ -4,7 +4,8 @@
   "description": "A Node.js twitch api",
   "main": "twitch.js",
   "scripts": {
-    "test": "test"
+    "start": "node_modules/.bin/supervisor app",
+    "test": "node_modules/.bin/mocha -w"
   },
   "repository": {
     "type": "git",

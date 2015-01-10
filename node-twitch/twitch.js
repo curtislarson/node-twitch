@@ -35,32 +35,39 @@ Twitch.authenticate = function(redirectUrl) {
                                this.onAuthTokenReceived);
 }
 
-Twitch.makeRequest = function(url, callback) {
+Twitch.prototype.makeRequest = function(url, callback, useOAuth) {
     if (undefined === url || !url) {
         return false;
     }
     if (undefined === callback || typeof callback != "function") {
         return false;
     }
+    if (undefined === useOAuth) {
+        useOAuth = true;
+    }
 
     var _this = this;
 
     var headers = {
-        'Accept': 'application/vnd.twitchtv.v3+json',
-        'Authorization': 'OAuth ' + this.d_authToken
+        'Accept': 'application/vnd.twitchtv.v3+json'
     };
+    if (useOAuth) {
+        headers["Authorization"] = "OAuth " + this.d_authToken;
+    }
 
     request.get({url: url, headers: headers}, function(err, response, body) {
-        body = JSON.parse(body);
-        console.log(body);
-        console.log(response);
-        console.log(err);
-
-        callback.call(_this, null, body);
+        if (err) {
+            console.log("Error=", err);
+        }
+        else {
+            body = JSON.parse(body);
+            callback.call(_this, null, body);
+        }
+        
     });
 }
 
-Twitch.getSubscribers = function(channel, callback) {
+Twitch.prototype.getSubscribers = function(channel, callback) {
     // https://github.com/justintv/Twitch-API/blob/master/v3_resources/subscriptions.md
     // So we can get total number
     // Can also get created at
