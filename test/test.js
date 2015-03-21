@@ -1,8 +1,8 @@
 "use strict";
 
-var Twitch = require("../twitch.js")
+var Twitch = require("../twitch.js");
 var should = require("should");
-var config = require("../../secret")
+var config = require("../secret.js");
 
 describe("makeRequest", function() {
     it("should make an empty request to the twitch api", function(done) {
@@ -22,12 +22,10 @@ describe("makeRequest", function() {
     });
 });
 
-/*describe("getSubscribers", function() {
-    var twitch = new Twitch()
-    it("should get the subscribers from the twitch api based on the " +
-       "provided channel", function(done) {
-        var twitch = new Twitch({key: "", secret: ""});
-        twitch.getSubscribers("cobaltstreak", function(error, body) {
+describe("getSubscribers", function() {
+    it("should get subscribers for the provided channel", function(done) {
+        var twitch = new Twitch(config);
+        twitch.getSubscribers("test_channel", function(error, body) {
             if (error) {
                 console.log(error);
             }
@@ -38,4 +36,20 @@ describe("makeRequest", function() {
             }
         })
     });
-});*/
+});
+
+describe("getFollows", function() {
+    it("should get follows for the provided channel", function(done) {
+        var twitch = new Twitch(config);
+        twitch.getFollows("test_channel", function(error, body) {
+            if (error) {
+                console.log(error);
+            }
+            else {
+                console.log(body);
+                should.not.exist(body.error);
+                done();
+            }
+        })
+    });
+});
